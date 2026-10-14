@@ -19,7 +19,7 @@ st.warning("Prototype notice: event rows are illustrative prompts, not verified 
 
 @st.cache_data
 def load_csv(filename):
-    return pd.read_csv(BASE / "data" / filename)
+    return pd.read_csv(BASE / filename)
 
 scores = load_csv("risk_scores.csv")
 events = load_csv("events.csv")
