@@ -1,0 +1,6 @@
+risk_id,risk_name,score,risk_level,updated_at,assessment_note
+R01,India-US trade tensions,1.00,Low,2026-10-14,Illustrative framework score; verify indicators and inputs.
+R02,India-China strategic competition,2.60,Moderate,2026-10-14,Illustrative framework score; verify indicators and inputs.
+R03,West Asia conflict and energy disruption,4.00,High,2026-10-14,Illustrative framework score; verify indicators and inputs.
+R04,Russia sanctions and energy exposure,4.30,High,2026-10-14,Illustrative framework score; verify indicators and inputs.
+R05,Global shipping and supply-chain disruption,2.95,Moderate,2026-10-14,Illustrative framework score; verify indicators and inputs.
