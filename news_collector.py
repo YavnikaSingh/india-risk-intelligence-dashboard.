@@ -99,10 +99,14 @@ def main():
         writer.writeheader()
         writer.writerows(existing.values())
 
+    
     print(f"Feed items received: {len(items)}")
     print(f"Relevant headlines matched this run: {len(matches)}")
     print(f"Unique headlines saved: {len(existing)}")
     print(f"Output file: {OUTPUT_FILE.name}")
+    print("Sample feed headlines:")
+    for item in items[:10]:
+        print("-", clean_text(item.findtext("title")))
 
 if __name__ == "__main__":
     main()
