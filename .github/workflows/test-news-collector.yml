@@ -1,0 +1,30 @@
+
+name: Test India News Collector
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  collect-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run news collector
+        run: python news_collector.py
+
+      - name: Upload collected news
+        uses: actions/upload-artifact@v4
+        with:
+          name: collected-india-news
+          path: collected_news.csv
+          if-no-files-found: error
