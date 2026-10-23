@@ -207,7 +207,7 @@ with dashboard:
 
 with tracker:
     st.markdown('<div class="section-eyebrow">Monitoring workspace</div>', unsafe_allow_html=True)
-    st.subheader("Event and development tracker")
+    st.subheader("India Geopolitical Event Tracker")
     st.markdown(
         '<div class="section-intro">Filter structured monitoring records. Confirm each event and source before publication.</div>',
         unsafe_allow_html=True,
