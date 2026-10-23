@@ -51,6 +51,61 @@ div[data-testid="stDataFrame"] { border: 1px solid var(--line); border-radius: 1
 div[data-testid="stAlert"] { border-radius: 12px; }
 .note-card { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 10px; padding: .9rem 1rem; margin: .6rem 0 1rem; color: #43536a; font-size: .9rem; line-height: 1.55; }
 .footer { color: #718096; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 2rem; font-size: .8rem; }
+
+/* Dark intelligence dashboard refresh */
+.stApp {
+    background: #0a1220;
+    color: #e5edf7;
+}
+
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+.block-container {
+    max-width: 1500px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+h1, h2, h3, h4 {
+    color: #edf5ff !important;
+}
+
+p, li, label, [data-testid="stCaptionContainer"] {
+    color: #b7c6d9;
+}
+
+[data-testid="stMetric"] {
+    background: #111f33;
+    border: 1px solid #2a3b53;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #9aabc2 !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: #f1f7ff !important;
+}
+
+[data-testid="stTabs"] button[aria-selected="true"] {
+    color: #2dd4bf !important;
+    border-bottom-color: #2dd4bf !important;
+}
+
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    border: 1px solid #2a3b53;
+    border-radius: 10px;
+}
+
+hr {
+    border-color: #2a3b53;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
