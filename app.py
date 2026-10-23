@@ -20,7 +20,7 @@ st.markdown("""
     --ink: #17263b;
     --muted: #68778b;
     --line: #dce4ed;
-    --canvas: #f3f6fa;
+    --canvas: #0a1220;
 }
 .stApp { background: var(--canvas); color: var(--ink); }
 .block-container { max-width: 1450px; padding-top: 1.3rem; padding-bottom: 3rem; }
