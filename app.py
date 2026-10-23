@@ -15,7 +15,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 :root {
-    --navy: #101d32;
+    --navy: #0b1628;
     --blue: #4b83c3;
     --ink: #17263b;
     --muted: #68778b;
