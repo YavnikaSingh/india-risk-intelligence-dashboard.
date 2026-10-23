@@ -209,8 +209,7 @@ with tracker:
     st.markdown('<div class="section-eyebrow">Monitoring workspace</div>', unsafe_allow_html=True)
     st.subheader("India Geopolitical Event Tracker")
     st.markdown(
-        '<div class="section-intro">Filter structured monitoring records. Confirm each event and source before publication.</div>',
-        unsafe_allow_html=True,
+        '<div class="section-intro">Monitor geopolitical, security and economic developments affecting India. Filter events by geography and category, search for key issues, and verify every claim against its original source before publication.</div>',
     )
     st.info("Starter rows are illustrative monitoring prompts. They should not be presented as verified event reports until checked.")
 
