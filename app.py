@@ -234,19 +234,51 @@ with tracker:
             filtered = filtered[mask]
 
     event_cols = [c for c in ["event_date", "country", "category", "headline", "source_name", "source_url", "record_status"] if c in filtered.columns]
-    st.dataframe(
-        filtered[event_cols], use_container_width=True, hide_index=True,
-        column_config={
-            "event_date": st.column_config.TextColumn("Event date"),
-            "country": st.column_config.TextColumn("Geography"),
-            "category": st.column_config.TextColumn("Category"),
-            "headline": st.column_config.TextColumn("Development / monitoring prompt", width="large"),
-            "source_name": st.column_config.TextColumn("Source"),
-            "source_url": st.column_config.LinkColumn("Open source", display_text="View source"),
-            "record_status": st.column_config.TextColumn("Record status"),
-        },
+    
+    if "severity" not in filtered.columns:
+        filtered["severity"] = "Medium"
+
+    if "record_status" not in filtered.columns:
+        filtered["record_status"] = "Unverified - review source"
+
+    st.markdown("### Event overview")
+    total_col, high_col, medium_col, low_col = st.columns(4)
+
+    severity_text = filtered["severity"].fillna("Medium").astype(str).str.lower()
+    total_col.metric("Events shown", len(filtered))
+    high_col.metric("High / critical", severity_text.isin(["high", "critical"]).sum())
+    medium_col.metric("Medium", severity_text.isin(["medium", "moderate"]).sum())
+    low_col.metric("Low", severity_text.eq("low").sum())
+
+    st.markdown("### Monitored developments")
+
+    if filtered.empty:
+        st.info("No events match these filters. Try changing your search or filters.")
+    else:
+        for _, event in filtered.iterrows():
+            headline = str(event.get("headline", "Untitled event"))
+            country_name = str(event.get("country", "Unspecified geography"))
+            category_name = str(event.get("category", "Uncategorised"))
+            event_date = str(event.get("event_date", "Date not provided"))
+            severity = str(event.get("severity", "Medium")).title()
+            source_name = str(event.get("source_name", "Source not listed"))
+            status = str(event.get("record_status", "Unverified - review source"))
+            source_url = str(event.get("source_url", ""))
+
+            with st.container(border=True):
+                st.markdown(f"**{headline}**")
+                st.caption(f"{country_name}  ·  {category_name}  ·  {event_date}")
+                st.markdown(f"**Severity:** {severity}  |  **Status:** {status}")
+                st.caption(f"Source: {source_name}")
+
+                if source_url.startswith(("https://", "http://")):
+                    st.markdown(f"[Open source]({source_url})")
+
+    st.caption(
+        "Portfolio prototype: verify event details and sources before treating "
+        "any entry as a confirmed current development."
     )
-    st.caption(f"{len(filtered)} record(s) shown.")
+
 
 with briefs:
     st.markdown('<div class="section-eyebrow">Analytical output</div>', unsafe_allow_html=True)
