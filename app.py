@@ -255,30 +255,85 @@ with tracker:
     if filtered.empty:
         st.info("No events match these filters. Try changing your search or filters.")
     else:
-        for _, event in filtered.iterrows():
-            headline = str(event.get("headline", "Untitled event"))
-            country_name = str(event.get("country", "Unspecified geography"))
-            category_name = str(event.get("category", "Uncategorised"))
-            event_date = str(event.get("event_date", "Date not provided"))
-            severity = str(event.get("severity", "Medium")).title()
-            source_name = str(event.get("source_name", "Source not listed"))
-            status = str(event.get("record_status", "Unverified - review source"))
-            source_url = str(event.get("source_url", ""))
+      
+    else:
+        severity_colors = {
+            "critical": "#ef4444",
+            "high": "#f97316",
+            "medium": "#eab308",
+            "moderate": "#eab308",
+            "low": "#22c55e",
+        }
 
-            with st.container(border=True):
-                st.markdown(f"**{headline}**")
-                st.caption(f"{country_name}  ·  {category_name}  ·  {event_date}")
-                st.markdown(f"**Severity:** {severity}  |  **Status:** {status}")
-                st.caption(f"Source: {source_name}")
+        events_list = list(filtered.iterrows())
 
-                if source_url.startswith(("https://", "http://")):
-                    st.markdown(f"[Open source]({source_url})")
+        for start in range(0, len(events_list), 3):
+            card_columns = st.columns(3, gap="medium")
+
+            for card_col, (_, event) in zip(
+                card_columns, events_list[start:start + 3]
+            ):
+                headline = str(event.get("headline", "Untitled event"))
+                country_name = str(event.get("country", "Unspecified geography"))
+                category_name = str(event.get("category", "Uncategorised"))
+                event_date = str(event.get("event_date", "Date not provided"))
+                severity = str(event.get("severity", "Medium")).lower()
+                source_name = str(event.get("source_name", "Source not listed"))
+                status = str(
+                    event.get("record_status", "Unverified - review source")
+                )
+                source_url = str(event.get("source_url", ""))
+
+                severity_color = severity_colors.get(
+                    severity, "#94a3b8"
+                )
+                severity_label = severity.title()
+
+                with card_col:
+                    with st.container(border=True):
+                        st.markdown(
+                            f"""
+                            <div style="height:4px;
+                                background:{severity_color};
+                                border-radius:4px;
+                                margin-bottom:12px;"></div>
+                            <div style="font-size:11px;
+                                color:{severity_color};
+                                font-weight:700;
+                                text-transform:uppercase;
+                                letter-spacing:1px;">
+                                {severity_label} SEVERITY
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+
+                        st.markdown(f"**{headline}**")
+                        st.caption(
+                            f"{country_name} · {event_date}"
+                        )
+
+                        st.markdown(
+                            f"""
+                            <div style="font-size:12px;
+                                color:#94a3b8;
+                                margin:8px 0;">
+                                {category_name}
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
+
+                        st.caption(f"Status: {status}")
+                        st.caption(f"Source: {source_name}")
+
+                        if source_url.startswith(("https://", "http://")):
+                            st.markdown(f"[Open source]({source_url})")
 
     st.caption(
-        "Portfolio prototype: verify event details and sources before treating "
-        "any entry as a confirmed current development."
+        "Portfolio prototype. Verify event dates, claims and sources "
+        "before treating entries as confirmed current developments."
     )
-
 
 with briefs:
     st.markdown('<div class="section-eyebrow">Analytical output</div>', unsafe_allow_html=True)
