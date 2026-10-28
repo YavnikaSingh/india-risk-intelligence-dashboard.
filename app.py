@@ -250,18 +250,18 @@ with tracker:
     medium_col.metric("Medium", severity_text.isin(["medium", "moderate"]).sum())
     low_col.metric("Low", severity_text.eq("low").sum())
 
-    st.markdown("### Monitored developments")
+            st.markdown("### Monitored developments")
 
-       if filtered.empty:
-        st.info("No events match these filters. Try changing your search or filters.")
-    else:
-        severity_colors = {
-            "critical": "#ef4444",
-            "high": "#f97316",
-            "medium": "#eab308",
-            "moderate": "#eab308",
-            "low": "#22c55e",
-        }
+        if filtered.empty:
+            st.info("No events match these filters. Try changing your search or filters.")
+        else:
+            severity_colors = {
+                "critical": "#ef4444",
+                "high": "#f97316",
+                "medium": "#eab308",
+                "moderate": "#eab308",
+                "low": "#22c55e",
+            }
         
 
         events_list = list(filtered.iterrows())
