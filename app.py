@@ -252,11 +252,16 @@ with tracker:
 
     st.markdown("### Monitored developments")
 
-    if filtered.empty:
+       if filtered.empty:
         st.info("No events match these filters. Try changing your search or filters.")
     else:
-      
-    else:
+        severity_colors = {
+            "critical": "#ef4444",
+            "high": "#f97316",
+            "medium": "#eab308",
+            "moderate": "#eab308",
+            "low": "#22c55e",
+        }
         severity_colors = {
             "critical": "#ef4444",
             "high": "#f97316",
